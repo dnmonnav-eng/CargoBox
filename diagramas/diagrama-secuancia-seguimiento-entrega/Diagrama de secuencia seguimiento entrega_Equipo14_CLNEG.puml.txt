@@ -1,0 +1,63 @@
+@startuml
+title Diagrama 2: Transporte, seguimiento y entrega
+
+actor Cliente
+participant Sistema
+participant Envio
+participant Repartidor
+
+Cliente -> Sistema: consultarEnvio(numeroGuia)
+activate Sistema
+
+Sistema -> Envio: consultarEstado()
+activate Envio
+Envio --> Sistema: devolverEstado()
+deactivate Envio
+
+Sistema --> Cliente: mostrarEstadoActual()
+
+== Asignación del envío ==
+
+Sistema -> Repartidor: verificarDisponibilidad()
+activate Repartidor
+Repartidor --> Sistema: devolverDisponibilidad()
+
+alt Repartidor disponible
+    Sistema -> Repartidor: asignarEnvio(numeroGuia)
+    Sistema -> Envio: actualizarEstado("Asignado")
+    Envio --> Sistema: confirmarActualizacion()
+
+    Repartidor -> Envio: recogerPaquete()
+    Envio --> Repartidor: confirmarRecogida()
+
+    Sistema -> Envio: actualizarEstado("En tránsito")
+    Envio --> Sistema: confirmarActualizacion()
+
+    == Seguimiento ==
+
+    loop Por cada actualización de ruta
+        Repartidor -> Sistema: reportarUbicacion(ubicacion)
+        Sistema -> Envio: registrarSeguimiento(ubicacion)
+        Envio --> Sistema: confirmarRegistro()
+    end
+
+    Repartidor -> Sistema: reportarResultadoEntrega()
+
+    alt Entrega exitosa
+        Sistema -> Envio: actualizarEstado("Entregado")
+        Envio --> Sistema: confirmarActualizacion()
+        Sistema --> Cliente: notificarEntrega()
+
+    else Entrega no realizada
+        Sistema -> Envio: actualizarEstado("Incidencia")
+        Envio --> Sistema: confirmarActualizacion()
+        Sistema --> Cliente: notificarIncidencia()
+    end
+
+else Repartidor no disponible
+    Sistema --> Cliente: informarRetrasoEnAsignacion()
+end
+
+deactivate Repartidor
+deactivate Sistema
+@enduml

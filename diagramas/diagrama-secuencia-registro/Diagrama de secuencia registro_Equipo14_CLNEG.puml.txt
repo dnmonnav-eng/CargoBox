@@ -1,0 +1,39 @@
+@startuml
+title Diagrama 1: Registro y creación de un envío
+
+actor Cliente
+participant Sistema
+participant Envio
+
+Cliente -> Sistema: solicitarEnvio(origen, destino, peso)
+activate Sistema
+
+Sistema -> Sistema: validarDatos(origen, destino, peso)
+
+alt Datos válidos
+    Sistema -> Sistema: calcularTarifa(peso, distancia)
+    Sistema --> Cliente: mostrarCotizacion(costo)
+
+    Cliente -> Sistema: aceptarCotizacion()
+    Sistema -> Sistema: procesarPago()
+
+    alt Pago aprobado
+        create Envio
+        Sistema -> Envio: crearEnvio(origen, destino, peso)
+        activate Envio
+        Envio --> Sistema: confirmarCreacion(numeroGuia)
+        deactivate Envio
+
+        Sistema -> Sistema: registrarEnvio()
+        Sistema --> Cliente: confirmarEnvio(numeroGuia, costo)
+
+    else Pago rechazado
+        Sistema --> Cliente: informarPagoRechazado()
+    end
+
+else Datos inválidos
+    Sistema --> Cliente: mostrarErroresValidacion()
+end
+
+deactivate Sistema
+@enduml></diagram></mxfile>
