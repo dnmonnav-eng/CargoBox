@@ -1,4 +1,4 @@
-# CargoBox - Sistema de Gestión y Trazabilidad Logística
+# CargoBox
 **Institución:** Universidad Autónoma de Nuevo León (UANL) — Facultad de Ingeniería Mecánica y Eléctrica (FIME)  
 **Curso:** Componentes de Lógica de Negocios  
 **Profesor:** Miguel Ángel Gómez Marroquín  
