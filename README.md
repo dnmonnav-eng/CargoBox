@@ -19,6 +19,7 @@ El repositorio se encuentra organizado de acuerdo con los entregables de la acti
 
 ```text
 ├── diagramas/
+│   ├── diagrama-DDD/
 │   ├── diagrama-de-clases/
 │   ├── diagrama-secuencia-seguimiento/
 │   └── diagrama-secuencia-registro/
