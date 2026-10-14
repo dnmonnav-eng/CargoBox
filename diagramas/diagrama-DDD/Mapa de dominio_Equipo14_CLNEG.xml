@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="wyRj0TUEEWDUgbo6qILz">
+    <mxGraphModel dx="2146" dy="1171" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bc" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;startSize=30;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontSize=14;" value="CONTEXTO DELIMITADO: ENVÍOS Y TRAZABILIDAD" vertex="1">
+          <mxGeometry height="1090" width="1620" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="agg_t" parent="bc" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;startSize=25;fillColor=#e8eaf6;strokeColor=#5c6bc0;fontColor=#283593;fontSize=12;dashed=1;" value="AGREGADO: TRASLADO" vertex="1">
+          <mxGeometry height="500" width="340" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="tras" parent="agg_t" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#c5cae9;strokeColor=#3f51b5;fontColor=#1a237e;strokeWidth=2;" value="&lt;b&gt;Traslado&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Entidad / Raíz del agregado&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;- idTraslado: Identificador&lt;br&gt;- guia: GuiaUnica (referencia)&lt;hr size=&quot;1&quot;&gt;+ clasificar(cdId)&lt;br&gt;+ despacharATransito()&lt;br&gt;+ registrarLlegadaCD(cdId)" vertex="1">
+          <mxGeometry height="150" width="300" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mov" parent="agg_t" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#f1f8e9;strokeColor=#689f38;fontColor=#33691e;" value="&lt;b&gt;Movimiento&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Value Object&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;tipo: TipoMovimiento&lt;br&gt;cdId: Identificador&lt;br&gt;fechaHora: FechaHora&lt;br&gt;responsableId: Identificador" vertex="1">
+          <mxGeometry height="120" width="300" x="20" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="ev_t" parent="agg_t" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#e1bee7;strokeColor=#8e24aa;fontColor=#4a148c;fontSize=10;" value="&lt;b&gt;EVENTOS QUE EMITE&lt;/b&gt;&lt;hr size=&quot;1&quot;&gt;• PaqueteClasificado (guia, cdId, fechaHora)&lt;br&gt;• PaqueteEnTransito (guia, cdOrigen, cdDestino)&lt;br&gt;• PaqueteLlegoACentroDestino (guia, cdId)" vertex="1">
+          <mxGeometry height="100" width="300" x="20" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="k1" edge="1" parent="agg_t" source="tras" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamond;startFill=1;startSize=14;endArrow=none;strokeWidth=2;strokeColor=#1976d2;labelBackgroundColor=#ffffff;fontSize=11;exitY=1;exitDx=0;exitDy=0;entryY=0;entryDx=0;entryDy=0;exitX=0.5;entryX=0.5;" target="mov" value="1 : 0..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="agg_p" parent="bc" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;startSize=25;fillColor=#e1f5fe;strokeColor=#0288d1;fontColor=#01579b;fontSize=12;dashed=1;" value="AGREGADO: PAQUETE" vertex="1">
+          <mxGeometry height="710" width="500" x="520" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="paq" parent="agg_p" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#bbdefb;strokeColor=#1976d2;fontColor=#0d47a1;strokeWidth=2;" value="&lt;b&gt;Paquete&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Entidad / Raíz del agregado&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;- guia: GuiaUnica&lt;br&gt;- estado: EstadoPaquete&lt;br&gt;- peso: Peso&lt;br&gt;- dimensiones: Dimensiones&lt;br&gt;- remitente: Contacto&lt;br&gt;- destinatario: Contacto&lt;br&gt;- direccionDestino: Direccion&lt;br&gt;- tarifa: Tarifa&lt;br&gt;- nivelServicio: NivelServicio&lt;br&gt;- valorDeclarado: ValorDeclarado&lt;br&gt;- fechaUltimaActualizacion: FechaHora&lt;hr size=&quot;1&quot;&gt;+ registrar(datosEnvio)&lt;br&gt;+ actualizarEstado(nuevoEstado, ubicacion)&lt;br&gt;+ enviarAPuntoRecoleccion()&lt;br&gt;+ iniciarDevolucion()&lt;br&gt;+ declararPerdida()&lt;br&gt;+ registrarRetraso(horas)" vertex="1">
+          <mxGeometry height="320" width="460" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rast" parent="agg_p" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#f1f8e9;strokeColor=#689f38;fontColor=#33691e;" value="&lt;b&gt;EventoRastreo&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Value Object&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;fechaHora: FechaHora&lt;br&gt;estadoResultante: EstadoPaquete&lt;br&gt;ubicacion: Texto&lt;br&gt;responsableId: Identificador&lt;br&gt;descripcion: Texto" vertex="1">
+          <mxGeometry height="130" width="460" x="20" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="ev_p" parent="agg_p" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#e1bee7;strokeColor=#8e24aa;fontColor=#4a148c;fontSize=10;" value="&lt;b&gt;EVENTOS QUE EMITE&lt;/b&gt;&lt;hr size=&quot;1&quot;&gt;• PaqueteRecibido (guia, fechaHora, sucursalId)&lt;br&gt;• EstadoPaqueteActualizado (guia, nuevoEstado, ubicacion)&lt;br&gt;• AlertaRetrasoDetectada (guia, horasSinActualizar)&lt;br&gt;• PerdidaDeclarada (guia, valorDeclarado)&lt;br&gt;• PaqueteDevuelto (guia, motivo)" vertex="1">
+          <mxGeometry height="125" width="460" x="20" y="555" as="geometry" />
+        </mxCell>
+        <mxCell id="k2" edge="1" parent="agg_p" source="paq" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamond;startFill=1;startSize=14;endArrow=none;strokeWidth=2;strokeColor=#1976d2;labelBackgroundColor=#ffffff;fontSize=11;exitY=1;exitDx=0;exitDy=0;entryY=0;entryDx=0;entryDy=0;exitX=0.5;entryX=0.5;" target="rast" value="1 : 1..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="agg_e" parent="bc" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;startSize=25;fillColor=#e0f7fa;strokeColor=#00acc1;fontColor=#006064;fontSize=12;dashed=1;" value="AGREGADO: ENTREGA" vertex="1">
+          <mxGeometry height="555" width="400" x="1180" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ent" parent="agg_e" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#b2ebf2;strokeColor=#00acc1;fontColor=#006064;strokeWidth=2;" value="&lt;b&gt;Entrega&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Entidad / Raíz del agregado&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;- idEntrega: Identificador&lt;br&gt;- guia: GuiaUnica (referencia)&lt;br&gt;- repartidorId: Identificador&lt;br&gt;- estado: EstadoEntrega&lt;hr size=&quot;1&quot;&gt;+ iniciar(guia, repartidorId)&lt;br&gt;+ registrarIntento(resultado, obs)&lt;br&gt;+ completar(evidencia)" vertex="1">
+          <mxGeometry height="175" width="360" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="int" parent="agg_e" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#f1f8e9;strokeColor=#689f38;fontColor=#33691e;" value="&lt;b&gt;IntentoEntrega&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Value Object&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;numero: Entero&lt;br&gt;fechaHora: FechaHora&lt;br&gt;resultado: ResultadoIntento&lt;br&gt;observaciones: Texto" vertex="1">
+          <mxGeometry height="140" width="170" x="20" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="evi" parent="agg_e" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#f1f8e9;strokeColor=#689f38;fontColor=#33691e;" value="&lt;b&gt;EvidenciaRecepcion&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Value Object&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;firmaDigital: Texto&lt;br&gt;fotografiaUrl: Texto&lt;br&gt;nombreReceptor: Texto&lt;br&gt;fechaHoraCaptura: FechaHora" vertex="1">
+          <mxGeometry height="140" width="170" x="210" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="ev_e" parent="agg_e" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#e1bee7;strokeColor=#8e24aa;fontColor=#4a148c;fontSize=10;" value="&lt;b&gt;EVENTOS QUE EMITE&lt;/b&gt;&lt;hr size=&quot;1&quot;&gt;• EntregaIniciada (guia, repartidorId)&lt;br&gt;• IntentoEntregaFallido (guia, numero, resultado)&lt;br&gt;• IntentosAgotados (guia)&lt;br&gt;• PaqueteEntregado (guia, nombreReceptor, fechaHora)" vertex="1">
+          <mxGeometry height="110" width="360" x="20" y="415" as="geometry" />
+        </mxCell>
+        <mxCell id="k3" edge="1" parent="agg_e" source="ent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamond;startFill=1;startSize=14;endArrow=none;strokeWidth=2;strokeColor=#1976d2;labelBackgroundColor=#ffffff;fontSize=11;exitY=1;exitDx=0;exitDy=0;entryY=0;entryDx=0;entryDy=0;exitX=0.236;entryX=0.5;" target="int" value="1 : 0..2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k4" edge="1" parent="agg_e" source="ent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=diamond;startFill=1;startSize=14;endArrow=none;strokeWidth=2;strokeColor=#1976d2;labelBackgroundColor=#ffffff;fontSize=11;exitY=1;exitDx=0;exitDy=0;entryY=0;entryDx=0;entryDy=0;exitX=0.764;entryX=0.5;" target="evi" value="1 : 0..1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="agg_i" parent="bc" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;startSize=25;fillColor=#fff8e1;strokeColor=#f9a825;fontColor=#e65100;fontSize=12;dashed=1;" value="AGREGADO: INCIDENCIA" vertex="1">
+          <mxGeometry height="400" width="340" x="20" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="inc" parent="agg_i" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#fff9c4;strokeColor=#fbc02d;fontColor=#e65100;strokeWidth=2;" value="&lt;b&gt;Incidencia&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Entidad / Raíz del agregado&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;- idIncidencia: Identificador&lt;br&gt;- guia: GuiaUnica (referencia)&lt;br&gt;- tipo: TipoIncidencia&lt;br&gt;- estado: EstadoIncidencia&lt;br&gt;- observaciones: Texto&lt;br&gt;- fechaRegistro: FechaHora&lt;hr size=&quot;1&quot;&gt;+ escalar(agenteId, motivo)&lt;br&gt;+ resolver()" vertex="1">
+          <mxGeometry height="190" width="300" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ev_i" parent="agg_i" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fontSize=11;fillColor=#e1bee7;strokeColor=#8e24aa;fontColor=#4a148c;fontSize=10;" value="&lt;b&gt;EVENTOS QUE EMITE&lt;/b&gt;&lt;hr size=&quot;1&quot;&gt;• IncidenciaRegistrada (idIncidencia, guia, tipo)&lt;br&gt;• IncidenciaEscalada (idIncidencia, guia, agenteId)&lt;br&gt;• IncidenciaResuelta (idIncidencia, guia)" vertex="1">
+          <mxGeometry height="100" width="300" x="20" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="svcs" parent="bc" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;startSize=25;fillColor=#e0f2f1;strokeColor=#00897b;fontColor=#004d40;fontSize=12;" value="SERVICIOS DE DOMINIO" vertex="1">
+          <mxGeometry height="175" width="500" x="520" y="852.5" as="geometry" />
+        </mxCell>
+        <mxCell id="sv1" parent="svcs" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fontSize=11;fillColor=#b2dfdb;strokeColor=#00897b;fontColor=#004d40;" value="&lt;b&gt;GeneradorDeGuia&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Servicio&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;+ generar(): GuiaUnica&lt;br&gt;(RN-01)" vertex="1">
+          <mxGeometry height="130" width="150" x="10" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sv2" parent="svcs" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fontSize=11;fillColor=#b2dfdb;strokeColor=#00897b;fontColor=#004d40;" value="&lt;b&gt;CalculadoraDeTarifa&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Servicio&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;+ calcular(...): Tarifa&lt;br&gt;(RN-02)" vertex="1">
+          <mxGeometry height="130" width="150" x="170" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sv3" parent="svcs" style="shape=rect;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fontSize=11;fillColor=#b2dfdb;strokeColor=#00897b;fontColor=#004d40;" value="&lt;b&gt;MonitorDeRetrasos&lt;/b&gt;&lt;br&gt;&lt;i&gt;&amp;lt;&amp;lt;Servicio&amp;gt;&amp;gt;&lt;/i&gt;&lt;hr size=&quot;1&quot;&gt;+ revisarPaquetes()&lt;br&gt;8 h Express / 24 h Estándar; &amp;gt; 72 h pérdida" vertex="1">
+          <mxGeometry height="130" width="150" x="330" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="vos" parent="bc" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;startSize=22;fillColor=#e8f5e9;strokeColor=#388e3c;fontColor=#1b5e20;fontSize=11;" value="OBJETOS DE VALOR (compartidos)" vertex="1">
+          <mxGeometry height="170" width="400" x="1180" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="vos_t" parent="vos" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fontSize=11;" value="• &lt;b&gt;GuiaUnica&lt;/b&gt; (codigo)&lt;br&gt;• &lt;b&gt;Peso&lt;/b&gt; (valorKg) [≤ 30 kg]&lt;br&gt;• &lt;b&gt;Dimensiones&lt;/b&gt; (largo, ancho, alto) [≤ 1.5 m]&lt;br&gt;• &lt;b&gt;Direccion&lt;/b&gt; (calle, numero, cp, ciudad)&lt;br&gt;• &lt;b&gt;Contacto&lt;/b&gt; (nombre, telefono)&lt;br&gt;• &lt;b&gt;Tarifa&lt;/b&gt; (monto, moneda MXN)&lt;br&gt;• &lt;b&gt;ValorDeclarado&lt;/b&gt; (monto, moneda) [compensación ≤ $15,000]" vertex="1">
+          <mxGeometry height="138" width="390" x="5" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="enm" parent="bc" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;startSize=22;fillColor=#fff3e0;strokeColor=#ef6c00;fontColor=#e65100;fontSize=11;" value="ENUMERACIONES (compartidas)" vertex="1">
+          <mxGeometry height="250" width="400" x="1180" y="815" as="geometry" />
+        </mxCell>
+        <mxCell id="enm_t" parent="enm" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;fontSize=11;" value="&lt;b&gt;EstadoPaquete&lt;/b&gt;: RECIBIDO, CLASIFICADO, EN_TRANSITO, CENTRO_DESTINO, EN_REPARTO, ENTREGADO, EN_PUNTO_RECOLECCION, DEVUELTO, PERDIDO&lt;br&gt;&lt;b&gt;NivelServicio&lt;/b&gt;: MISMO_DIA, EXPRESS, ESTANDAR&lt;br&gt;&lt;b&gt;TipoMovimiento&lt;/b&gt;: CLASIFICACION, SALIDA_TRANSITO, LLEGADA_CD_DESTINO&lt;br&gt;&lt;b&gt;EstadoEntrega&lt;/b&gt;: EN_CURSO, COMPLETADA, SIN_ENTREGA&lt;br&gt;&lt;b&gt;ResultadoIntento&lt;/b&gt;: EXITOSO, AUSENTE, DIRECCION_INCORRECTA, RECHAZADO&lt;br&gt;&lt;b&gt;TipoIncidencia&lt;/b&gt;: DIRECCION_INCORRECTA, DESTINATARIO_AUSENTE, PAQUETE_DANADO, PERDIDA, RECHAZO&lt;br&gt;&lt;b&gt;EstadoIncidencia&lt;/b&gt;: ABIERTA, ESCALADA, RESUELTA" vertex="1">
+          <mxGeometry height="218" width="390" x="5" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" edge="1" parent="bc" source="agg_t" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=8;dashed=1;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=11;strokeColor=#3f51b5;exitX=1;exitY=0.22;exitDx=0;exitDy=0;entryX=0;entryY=0.1549;entryDx=0;entryDy=0;" target="agg_p" value="eventos de traslado">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" edge="1" parent="bc" source="agg_p" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=8;dashed=1;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=11;strokeColor=#1976d2;exitX=0;exitY=0.3662;exitDx=0;exitDy=0;entryX=1;entryY=0.52;entryDx=0;entryDy=0;" target="agg_t" value="PaqueteRecibido">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" edge="1" parent="bc" source="agg_e" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=8;dashed=1;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=11;strokeColor=#00acc1;exitX=0;exitY=0.1982;exitDx=0;exitDy=0;entryX=1;entryY=0.1549;entryDx=0;entryDy=0;" target="agg_p" value="eventos de entrega">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" edge="1" parent="bc" source="agg_i" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=8;dashed=1;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=11;strokeColor=#f57f17;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.9014;entryDx=0;entryDy=0;" target="agg_p" value="ref. por guía (ID)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v1" edge="1" parent="bc" source="agg_p" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=8;dashed=1;strokeWidth=1.5;strokeColor=#00897b;labelBackgroundColor=#ffffff;fontSize=11;exitX=0.17;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sv1" value="pide guía">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v2" edge="1" parent="bc" source="agg_p" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=8;dashed=1;strokeWidth=1.5;strokeColor=#00897b;labelBackgroundColor=#ffffff;fontSize=11;exitX=0.49;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sv2" value="calcula tarifa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v3" edge="1" parent="bc" source="sv3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=open;endSize=8;dashed=1;strokeWidth=1.5;strokeColor=#00897b;labelBackgroundColor=#ffffff;fontSize=11;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.81;entryY=1;entryDx=0;entryDy=0;" target="agg_p" value="vigila">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
